@@ -38,6 +38,8 @@ body {
 #search #displaying {
   padding-left: 1em;
   font-size: 1.2em;
+  color: white;
+  font-weight: bolder;
 }
 #root {
   display: grid;
