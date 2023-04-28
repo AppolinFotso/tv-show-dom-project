@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 #root {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -5,14 +8,23 @@
   color: black;
 }
 
-p {
-  opacity: 0.7;
-  text-align: left;
-}
-
 #root div {
   box-shadow: 1px 1px 5px gainsboro;
-  padding: 1em;
   background-color: lightgray;
   text-align: center;
+  border-radius: 1.3em 1.3em 1em 1em;
+}
+
+#root div h2 {
+  background-color: whitesmoke;
+  border-radius: 1em 1em 1em 1em;
+  border: 3px solid lightgrey;
+  padding: 1em 0.5em;
+  margin-top: 0;
+}
+
+#root div p {
+  opacity: 0.7;
+  text-align: left;
+  margin: 1em;
 }
