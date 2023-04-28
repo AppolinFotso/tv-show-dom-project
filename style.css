@@ -1,6 +1,24 @@
 * {
   box-sizing: border-box;
 }
+#search {
+  position: relative;
+}
+#search i {
+  position: absolute;
+  top: 2.8em;
+  left: 1.2em;
+  font-size: 1.5em;
+  opacity: 0.4;
+}
+#searchEpisode {
+  width: 20%;
+  height: 4em;
+  margin: 2em auto 2em 1em;
+  border-radius: 1em 1em 1em 1em;
+  padding-left: 2em;
+  font-size: 1.2em;
+}
 #root {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
