@@ -1,5 +1,18 @@
 #root {
-  display: flex;
-  flex-wrap: wrap;
-  color: red;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2em;
+  color: black;
+}
+
+p {
+  opacity: 0.7;
+  text-align: left;
+}
+
+#root div {
+  box-shadow: 1px 1px 5px gainsboro;
+  padding: 1em;
+  background-color: lightgray;
+  text-align: center;
 }

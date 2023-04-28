@@ -12,7 +12,7 @@ function makePageForEpisodes(episodeList) {
     const episodePoster = document.createElement("img");
     const episodeSummary = document.createElement("p");
 
-    episodeTitle.textContent = `${episode.name}-${
+    episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`}`;
     episodePoster.setAttribute("src", `${episode.image.medium}`);
