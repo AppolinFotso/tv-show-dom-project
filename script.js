@@ -6,26 +6,50 @@ function setup() {
 
 function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
+  const selectElement = document.getElementById("selectEpisode");
+  let idForEpisodeContainer = "div";
+
   for (let episode of episodeList) {
+    // creating html elements to display each episode info
     const episodeContainer = document.createElement("div");
     const episodeTitle = document.createElement("h2");
     const episodePoster = document.createElement("img");
     const episodeSummary = document.createElement("p");
+    // creating an option element to use inside a select element
+    const selectOptions = document.createElement("option");
 
+    selectOptions.textContent = `${
+      episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
+    }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`} - ${
+      episode.name
+    }`;
+    selectOptions.setAttribute("href", idForEpisodeContainer);
+    // rendering the episode name, the season and episode number into h2
     episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`}`;
+    //rendering an image into the img element
     episodePoster.setAttribute("src", `${episode.image.medium}`);
     episodeSummary.innerHTML = `${episode.summary}`;
+
+    //appending option to the select element
+    selectElement.appendChild(selectOptions);
+    //appending h2, img, and p element to the div element
     episodeContainer.appendChild(episodeTitle);
     episodeContainer.appendChild(episodePoster);
     episodeContainer.appendChild(episodeSummary);
+    //setting the ID attribute to the div child element
+    episodeContainer.setAttribute("id", idForEpisodeContainer);
+    //appending the div child into the div parent
     rootElem.appendChild(episodeContainer);
+    idForEpisodeContainer += 1;
   }
 }
+
+// taking control of the input element and creating an event listener
 const inputElement = document.getElementById("searchEpisode");
 inputElement.addEventListener("keyup", searchEpisodeList);
-
+// creating a call back function for the event listener
 function searchEpisodeList() {
   const rootElem = document.getElementById("root");
   const divSearchContainer = document.getElementById("search");

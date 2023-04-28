@@ -6,17 +6,28 @@
 }
 #search i {
   position: absolute;
-  top: 2.8em;
-  left: 1.2em;
+  top: 2.3em;
+  left: 21em;
   font-size: 1.5em;
   opacity: 0.4;
+  z-index: 0;
 }
-#searchEpisode {
+#search select {
+  border-radius: 1em 1em 1em 1em;
+  padding-left: 1.5em;
+  font-size: 1.2em;
+  height: 3em;
+}
+#search #searchEpisode {
   width: 20%;
-  height: 4em;
+  height: 3em;
   margin: 2em auto 2em 1em;
   border-radius: 1em 1em 1em 1em;
   padding-left: 2em;
+  font-size: 1.2em;
+}
+#search #displaying {
+  padding-left: 1em;
   font-size: 1.2em;
 }
 #root {
