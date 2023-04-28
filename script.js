@@ -28,10 +28,14 @@ inputElement.addEventListener("keyup", searchEpisodeList);
 
 function searchEpisodeList() {
   const rootElem = document.getElementById("root");
+  const divSearchContainer = document.getElementById("search");
+  const numberOfEpisodeFound = document.getElementById("displaying");
   const allEpisodes = getAllEpisodes();
   const matchingEpisodes = [];
   if (inputElement.value == "") {
-    window.onload = setup;
+    rootElem.innerHTML = ``;
+    numberOfEpisodeFound.style.display = "none";
+    makePageForEpisodes(allEpisodes);
   } else {
     rootElem.innerHTML = ``;
     for (let episode of allEpisodes) {
@@ -42,6 +46,10 @@ function searchEpisodeList() {
         matchingEpisodes.push(episode);
       }
     }
+    numberOfEpisodeFound.style.display = "";
+
+    numberOfEpisodeFound.textContent = `Displaying ${matchingEpisodes.length} of ${allEpisodes.length} episodes`;
+    divSearchContainer.appendChild(numberOfEpisodeFound);
     makePageForEpisodes(matchingEpisodes);
   }
 }
