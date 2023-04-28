@@ -8,7 +8,7 @@ function makePageForEpisodes(episodeList) {
   const rootElem = document.getElementById("root");
   const selectElement = document.getElementById("selectEpisode");
   let idForEpisodeContainer = "div";
-
+  let counter = 1;
   for (let episode of episodeList) {
     // creating html elements to display each episode info
     const episodeContainer = document.createElement("div");
@@ -23,7 +23,7 @@ function makePageForEpisodes(episodeList) {
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`} - ${
       episode.name
     }`;
-    selectOptions.setAttribute("href", idForEpisodeContainer);
+    selectOptions.setAttribute("value", `#${idForEpisodeContainer + counter}`);
     // rendering the episode name, the season and episode number into h2
     episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
@@ -39,10 +39,10 @@ function makePageForEpisodes(episodeList) {
     episodeContainer.appendChild(episodePoster);
     episodeContainer.appendChild(episodeSummary);
     //setting the ID attribute to the div child element
-    episodeContainer.setAttribute("id", idForEpisodeContainer);
+    episodeContainer.setAttribute("id", idForEpisodeContainer + counter);
     //appending the div child into the div parent
     rootElem.appendChild(episodeContainer);
-    idForEpisodeContainer += 1;
+    counter++;
   }
 }
 
