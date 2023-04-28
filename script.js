@@ -23,5 +23,27 @@ function makePageForEpisodes(episodeList) {
     rootElem.appendChild(episodeContainer);
   }
 }
+const inputElement = document.getElementById("searchEpisode");
+inputElement.addEventListener("keyup", searchEpisodeList);
+
+function searchEpisodeList() {
+  const rootElem = document.getElementById("root");
+  const allEpisodes = getAllEpisodes();
+  const matchingEpisodes = [];
+  if (inputElement.value == "") {
+    window.onload = setup;
+  } else {
+    rootElem.innerHTML = ``;
+    for (let episode of allEpisodes) {
+      if (
+        episode.name.toLowerCase().includes(inputElement.value.toLowerCase()) ||
+        episode.summary.toLowerCase().includes(inputElement.value.toLowerCase())
+      ) {
+        matchingEpisodes.push(episode);
+      }
+    }
+    makePageForEpisodes(matchingEpisodes);
+  }
+}
 
 window.onload = setup;
