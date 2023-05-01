@@ -24,23 +24,23 @@ function makePageForEpisodes(episodeList) {
       episode.name
     }`;
     selectOptions.setAttribute("value", `#${idForEpisodeContainer + counter}`);
-    // rendering the episode name, the season and episode number into h2
+    // rendering the episode name, the season and episode number inside h2
     episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`}`;
-    //rendering an image into the img element
+    //rendering an image inside the img element
     episodePoster.setAttribute("src", `${episode.image.medium}`);
     episodeSummary.innerHTML = `${episode.summary}`;
 
-    //appending option to the select element
+    //appending option inside the select element
     selectElement.appendChild(selectOptions);
-    //appending h2, img, and p element to the div element
+    //appending h2, img, and p element inside the div element
     episodeContainer.appendChild(episodeTitle);
     episodeContainer.appendChild(episodePoster);
     episodeContainer.appendChild(episodeSummary);
-    //setting the ID attribute to the div child element
+    //setting the ID attribute on the div child element
     episodeContainer.setAttribute("id", idForEpisodeContainer + counter);
-    //appending the div child into the div parent
+    //appending the div child inside the div parent
     rootElem.appendChild(episodeContainer);
     counter++;
   }
