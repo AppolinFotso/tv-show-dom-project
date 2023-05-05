@@ -1,20 +1,24 @@
-//You can edit ALL of the code here
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
 
 function makePageForEpisodes(episodeList) {
+  // taking control of the div and select elements.
   const rootElem = document.getElementById("root");
   const selectElement = document.getElementById("selectEpisode");
+
+  // creating variables that will be passed as id attribute to identify the div holding each episode.
   let idForEpisodeContainer = "div";
   let counter = 1;
+
+  // Iterating through the Array of episodes while creating html elements to display each episode info.
   for (let episode of episodeList) {
-    // creating html elements to display each episode info
     const episodeContainer = document.createElement("div");
     const episodeTitle = document.createElement("h2");
     const episodePoster = document.createElement("img");
     const episodeSummary = document.createElement("p");
+
     // creating an option element to use inside a select element
     const selectOptions = document.createElement("option");
 
@@ -24,7 +28,8 @@ function makePageForEpisodes(episodeList) {
       episode.name
     }`;
     selectOptions.setAttribute("value", `#${idForEpisodeContainer + counter}`);
-    // rendering the episode name, the season and episode number inside h2
+
+    // rendering the episode name, season and episode number inside h2
     episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`}`;
@@ -38,9 +43,9 @@ function makePageForEpisodes(episodeList) {
     episodeContainer.appendChild(episodeTitle);
     episodeContainer.appendChild(episodePoster);
     episodeContainer.appendChild(episodeSummary);
-    //setting the ID attribute on the div child element
+    //setting the ID attribute on the div element
     episodeContainer.setAttribute("id", idForEpisodeContainer + counter);
-    //appending the div child inside the div parent
+    //appending the div episodeContainer inside the div parent root
     rootElem.appendChild(episodeContainer);
     counter++;
   }
