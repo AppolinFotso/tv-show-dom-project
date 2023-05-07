@@ -4,6 +4,8 @@
 body {
   display: flex;
   flex-direction: column;
+  background: url("./dragon.jpeg");
+  background-size: cover;
 }
 #search {
   position: relative;
@@ -86,4 +88,5 @@ button {
 
 footer {
   padding: 3em;
+  color: white;
 }
