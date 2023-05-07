@@ -56,16 +56,20 @@ const rootElem = document.getElementById("root");
 const selectElement = document.getElementById("selectEpisode");
 selectElement.addEventListener("change", () => {
   location = selectElement.value;
-  if (rootElem.childNodes.length <= 1) {
+  if (rootElem.childNodes.length <= 2) {
     setup();
   }
   for (let child of rootElem.childNodes) {
     if (`#${child.getAttribute("id")}` == selectElement.value) {
+      const reloadPage = document.createElement("button");
+      reloadPage.textContent = `Reload all the episodes`;
       rootElem.innerHTML = ``;
       rootElem.appendChild(child);
-      const reloadPage = document.createElement("button");
-      reloadPage.textContent = `Load all the episodes`;
       rootElem.appendChild(reloadPage);
+      reloadPage.addEventListener("click", () => {
+        rootElem.innerHTML = ``;
+        setup();
+      });
     }
   }
 });
