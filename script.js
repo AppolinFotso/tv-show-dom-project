@@ -63,6 +63,9 @@ selectElement.addEventListener("change", () => {
     if (`#${child.getAttribute("id")}` == selectElement.value) {
       rootElem.innerHTML = ``;
       rootElem.appendChild(child);
+      const reloadPage = document.createElement("button");
+      reloadPage.textContent = `Load all the episodes`;
+      rootElem.appendChild(reloadPage);
     }
   }
 });

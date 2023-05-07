@@ -76,6 +76,13 @@ body {
 #root div img {
   border: 1px solid yellow;
 }
+button {
+  border-radius: 1em 1em 1em 1em;
+  height: 3em;
+  width: 12em;
+  font-size: 1.2em;
+  background-color: yellow;
+}
 
 footer {
   padding: 3em;
