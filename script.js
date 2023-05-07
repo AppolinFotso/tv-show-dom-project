@@ -51,6 +51,22 @@ function makePageForEpisodes(episodeList) {
   }
 }
 
+// Locating the selected episode.
+const rootElem = document.getElementById("root");
+const selectElement = document.getElementById("selectEpisode");
+selectElement.addEventListener("change", () => {
+  location = selectElement.value;
+  if (rootElem.childNodes.length <= 1) {
+    setup();
+  }
+  for (let child of rootElem.childNodes) {
+    if (`#${child.getAttribute("id")}` == selectElement.value) {
+      rootElem.innerHTML = ``;
+      rootElem.appendChild(child);
+    }
+  }
+});
+
 // taking control of the input element and creating an event listener
 const inputElement = document.getElementById("searchEpisode");
 inputElement.addEventListener("keyup", searchEpisodeList);
