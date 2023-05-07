@@ -4,9 +4,7 @@ myPromise
   .then((response) => response.json())
   .then((data) => {
     console.log(data);
-    function setup() {
-      makePageForEpisodes(data);
-    }
+    makePageForEpisodes(data);
 
     function makePageForEpisodes(episodeList) {
       // taking control of the div and select elements.
@@ -68,7 +66,7 @@ myPromise
       if (rootElem.childNodes.length <= 2) {
         rootElem.innerHTML = ``;
 
-        setup();
+        makePageForEpisodes(data);
       }
       for (let child of rootElem.childNodes) {
         if (`#${child.getAttribute("id")}` == selectElement.value) {
@@ -79,7 +77,7 @@ myPromise
           rootElem.appendChild(reloadPage);
           reloadPage.addEventListener("click", () => {
             rootElem.innerHTML = ``;
-            setup();
+            makePageForEpisodes(data);
           });
         }
       }
@@ -121,5 +119,5 @@ myPromise
       }
     }
 
-    window.onload = setup;
+    window.onload = makePageForEpisodes(data);
   });
