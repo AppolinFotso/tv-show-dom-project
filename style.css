@@ -15,30 +15,25 @@ body {
   border-radius: 1em 1em 1em 1em;
   box-shadow: 1px 1px 5px gainsboro;
 }
-#search i {
-  position: absolute;
-  top: 2.3em;
-  left: 21.5em;
-  font-size: 1.5em;
-  opacity: 0.4;
-  z-index: 0;
-}
+
 #search select {
   border-radius: 1em 1em 1em 1em;
   padding-left: 1.5em;
   font-size: 1.2em;
-  height: 3em;
+  height: 2.5em;
   width: 25em;
-  border: 3px solid yellow;
+  border: 3px solid white;
+  margin-left: 1em;
+  background-color: white;
 }
 #search #searchEpisode {
   width: 25%;
-  height: 3em;
+  height: 2.5em;
   margin: 2em auto 2em 1em;
   border-radius: 1em 1em 1em 1em;
   padding-left: 2em;
   font-size: 1.2em;
-  border: 3px solid yellow;
+  border: 3px solid white;
 }
 #search #displaying {
   padding-left: 1em;
@@ -49,10 +44,11 @@ body {
 #root {
   color: black;
   margin-top: 3em;
+  border-radius: 1em 1em 1em 1em;
 }
 .gridDisplay {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 2em;
   background: url("./dragon.jpeg");
   padding: 2em;
@@ -129,5 +125,5 @@ button {
 
 footer {
   padding: 3em;
-  color: white;
+  color: black;
 }
