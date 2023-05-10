@@ -141,16 +141,30 @@ function displayAllShows(shows) {
     showContainer.appendChild(showHeader);
     showContainer.appendChild(showInfo);
     rootElem.appendChild(showContainer);
+    showHeader.addEventListener("click", (e) => {
+      if (e.target.textContent == show.name) {
+        const myPromise = fetch(
+          `https://api.tvmaze.com/shows/${show.id}/episodes`
+        );
+        myPromise
+          .then((response) => response.json())
+          .then((data) => {
+            makePageForEpisodes(data);
+            selectAnEpisode(data);
+            episodes = data;
+          });
+      }
+    });
   }
 }
 displayAllShows(orderedShowList);
 
+// applying event listener on selectShow element
 selectShow.addEventListener("change", () => {
   showId = 0;
   for (let show of orderedShowList) {
     if (`#show${show.id}` == selectShow.value) {
       showId += show.id;
-      console.log(showId);
     }
   }
 
@@ -162,63 +176,63 @@ selectShow.addEventListener("change", () => {
       selectAnEpisode(data);
       episodes = data;
     });
+});
 
-  // Locating the selected episode.
-  selectEpisode.addEventListener("change", () => {
-    if (rootElem.childNodes.length <= 2) {
-      makePageForEpisodes(episodes);
-    }
+// Locating the selected episode.
+selectEpisode.addEventListener("change", () => {
+  if (rootElem.childNodes.length <= 2) {
+    makePageForEpisodes(episodes);
+  }
 
-    for (let child of rootElem.childNodes) {
-      if (`#${child.getAttribute("id")}` == selectEpisode.value) {
-        const reloadPage = document.createElement("button");
-        reloadPage.textContent = `Reload all the episodes`;
-        rootElem.innerHTML = ``;
-        rootElem.appendChild(child);
-        rootElem.appendChild(reloadPage);
-
-        // reload the entire show on click
-        reloadPage.addEventListener("click", () => {
-          makePageForEpisodes(episodes);
-        });
-      }
-    }
-  });
-
-  // creating an event listener for the search input
-  searchForEpisode.addEventListener("keyup", searchEpisodeList);
-
-  // creating a call back function for the event listener
-  function searchEpisodeList() {
-    const rootElem = document.getElementById("root");
-    const divSearchContainer = document.getElementById("search");
-    const numberOfEpisodeFound = document.getElementById("displaying");
-
-    const matchingEpisodes = [];
-    if (searchForEpisode.value == "") {
+  for (let child of rootElem.childNodes) {
+    if (`#${child.getAttribute("id")}` == selectEpisode.value) {
+      const reloadPage = document.createElement("button");
+      reloadPage.textContent = `Reload all the episodes`;
       rootElem.innerHTML = ``;
-      numberOfEpisodeFound.style.display = "none";
-      makePageForEpisodes(episodes);
-    } else {
-      rootElem.innerHTML = ``;
+      rootElem.appendChild(child);
+      rootElem.appendChild(reloadPage);
 
-      for (let episode of episodes) {
-        if (
-          episode.name
-            .toLowerCase()
-            .includes(searchForEpisode.value.toLowerCase()) ||
-          episode.summary
-            .toLowerCase()
-            .includes(searchForEpisode.value.toLowerCase())
-        ) {
-          matchingEpisodes.push(episode);
-        }
-      }
-      numberOfEpisodeFound.style.display = "";
-
-      numberOfEpisodeFound.textContent = `Displaying ${matchingEpisodes.length} of ${episodes.length} episodes`;
-      divSearchContainer.appendChild(numberOfEpisodeFound);
-      makePageForEpisodes(matchingEpisodes);
+      // reload the entire show on click
+      reloadPage.addEventListener("click", () => {
+        makePageForEpisodes(episodes);
+      });
     }
   }
 });
+
+// creating an event listener for the search input
+searchForEpisode.addEventListener("keyup", searchEpisodeList);
+
+// creating a call back function for the event listener
+function searchEpisodeList() {
+  const rootElem = document.getElementById("root");
+  const divSearchContainer = document.getElementById("search");
+  const numberOfEpisodeFound = document.getElementById("displaying");
+
+  const matchingEpisodes = [];
+  if (searchForEpisode.value == "") {
+    rootElem.innerHTML = ``;
+    numberOfEpisodeFound.style.display = "none";
+    makePageForEpisodes(episodes);
+  } else {
+    rootElem.innerHTML = ``;
+
+    for (let episode of episodes) {
+      if (
+        episode.name
+          .toLowerCase()
+          .includes(searchForEpisode.value.toLowerCase()) ||
+        episode.summary
+          .toLowerCase()
+          .includes(searchForEpisode.value.toLowerCase())
+      ) {
+        matchingEpisodes.push(episode);
+      }
+    }
+    numberOfEpisodeFound.style.display = "";
+
+    numberOfEpisodeFound.textContent = `Displaying ${matchingEpisodes.length} of ${episodes.length} episodes`;
+    divSearchContainer.appendChild(numberOfEpisodeFound);
+    makePageForEpisodes(matchingEpisodes);
+  }
+}
