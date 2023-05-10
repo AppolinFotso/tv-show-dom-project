@@ -4,7 +4,6 @@
 body {
   display: flex;
   flex-direction: column;
-  background: url("./dragon.jpeg");
   background-size: cover;
 }
 #search {
@@ -48,13 +47,24 @@ body {
   font-weight: bolder;
 }
 #root {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2em;
   color: black;
   margin-top: 3em;
 }
-
+.gridDisplay {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2em;
+  background: url("./dragon.jpeg");
+  padding: 2em;
+}
+.flexDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  align-items: center;
+  background: url("./dragon.jpeg");
+  padding-top: 3em;
+}
 #root div {
   box-shadow: 1px 1px 5px gainsboro;
   background-color: rgb(27, 25, 25);
@@ -63,9 +73,10 @@ body {
 }
 
 #root div h2 {
-  background-color: yellow;
+  background-color: white;
   border-radius: 1em 1em 1em 1em;
-  border: 3px solid rgb(27, 25, 25);
+  box-shadow: 1px 1px 5px white;
+
   padding: 0.5em 0.5em;
   margin-top: 0;
 }
@@ -78,7 +89,35 @@ body {
 }
 
 #root div img {
-  border: 1px solid yellow;
+  border: 1px solid white;
+}
+
+#root section {
+  background-color: white;
+  border-radius: 1em 1em 1em 1em;
+  width: 70%;
+  box-shadow: 1px 1px 5px white;
+}
+
+#root section > div {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  padding: 5em;
+  margin: 0.5em;
+}
+#root section div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+#root section h2 {
+  text-align: center;
+  font-size: 3em;
+}
+#root section div img {
+  border-radius: 1em 1em 1em 1em;
+  box-shadow: 1px 1px 5px white;
+  border: 1px solid white;
 }
 button {
   border-radius: 1em 1em 1em 1em;

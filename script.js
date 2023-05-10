@@ -6,8 +6,13 @@ const unorderedShowlist = getAllShows();
 const allShows = [];
 let alphaBet = "abcdefghijklmnopqrstuvwxyz";
 let episodes;
+let showId;
 
 function makePageForEpisodes(episodeList) {
+  if (rootElem.classList.contains("flexDisplay")) {
+    rootElem.classList.remove("flexDisplay");
+  }
+
   // taking control of the div and select elements.
   rootElem.innerHTML = ``;
   selectEpisode.innerHTML = ``;
@@ -54,15 +59,6 @@ function makePageForEpisodes(episodeList) {
   }
 }
 
-// creating default show to be shown on load
-let showId = 82;
-const myPromise = fetch(`https://api.tvmaze.com/shows/${showId}/episodes`);
-myPromise
-  .then((response) => response.json())
-  .then((data) => {
-    makePageForEpisodes(data);
-  });
-
 //creating a sorted array of shows
 for (let letter of alphaBet) {
   for (let show of unorderedShowlist) {
@@ -71,7 +67,7 @@ for (let letter of alphaBet) {
     }
   }
 }
-
+console.log(allShows);
 // Iterating through the Array of shows.
 for (let show of allShows) {
   // creating an option element to use inside a select element
@@ -81,6 +77,61 @@ for (let show of allShows) {
   selectOption.setAttribute("value", `#${alpha + show.id}`);
   //appending option inside the select element
   selectShow.appendChild(selectOption);
+}
+
+// loading each show info on start.
+displayAllShows(allShows);
+function displayAllShows(shows) {
+  rootElem.classList.toggle("flexDisplay");
+  for (let show of shows) {
+    const showContainer = document.createElement("section");
+    const showInfo = document.createElement("div");
+    const showHeader = document.createElement("h2");
+    const showImage = document.createElement("img");
+    const showSummary = document.createElement("p");
+    const showRating = document.createElement("p");
+    const showGenres = document.createElement("p");
+    const showStatus = document.createElement("p");
+    const showRuntime = document.createElement("p");
+    const ratingContainer = document.createElement("div");
+
+    showHeader.textContent = `${show.name}`;
+    showImage.setAttribute(
+      "src",
+      `${show.image == null ? "./comingsoon.jpg" : show.image.medium}`
+    );
+    showSummary.innerHTML = `${show.summary}`;
+    showRating.textContent = `Rated: ${show.rating.average}`;
+    // iterate through each show genres
+    let genres;
+
+    if (show.genres.length == 1) {
+      genres += show.genres[0];
+    } else {
+      for (let genre of show.genres) {
+        if (show.genres.indexOf(genre) == show.genres.length - 1) {
+          genres += genre;
+        } else {
+          genres += `${genre} | `;
+        }
+      }
+    }
+    showGenres.textContent = `Genres: ${show.genres}`;
+    showStatus.textContent = `Status: ${show.status}`;
+    showRuntime.textContent = `Runtime: ${show.runtime}`;
+    ratingContainer.appendChild(showRating);
+    ratingContainer.appendChild(showGenres);
+
+    ratingContainer.appendChild(showStatus);
+
+    ratingContainer.appendChild(showRuntime);
+    showInfo.appendChild(showImage);
+    showInfo.appendChild(showSummary);
+    showInfo.appendChild(ratingContainer);
+    showContainer.appendChild(showHeader);
+    showContainer.appendChild(showInfo);
+    rootElem.appendChild(showContainer);
+  }
 }
 
 selectShow.addEventListener("change", () => {
