@@ -1,10 +1,9 @@
 const rootElem = document.getElementById("root");
 const selectEpisode = document.getElementById("selectEpisode");
 const selectShow = document.querySelector("#selectShow");
-const inputElement = document.getElementById("searchEpisode");
+const searchForEpisode = document.getElementById("searchEpisode");
 const unorderedShowlist = getAllShows();
-const allShows = [];
-let alphaBet = "abcdefghijklmnopqrstuvwxyz";
+const orderedShowList = [];
 let episodes;
 let showId;
 
@@ -15,7 +14,6 @@ function makePageForEpisodes(episodeList) {
 
   // taking control of the div and select elements.
   rootElem.innerHTML = ``;
-  selectEpisode.innerHTML = ``;
   // creating variables that will be passed as id attribute to identify the div holding each episode.
   let idForEpisodeContainer = "div";
   let counter = 1;
@@ -27,16 +25,6 @@ function makePageForEpisodes(episodeList) {
     const episodePoster = document.createElement("img");
     const episodeSummary = document.createElement("p");
 
-    // creating an option element to use inside a select element
-    const selectOptions = document.createElement("option");
-
-    selectOptions.textContent = `${
-      episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
-    }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`} - ${
-      episode.name
-    }`;
-    selectOptions.setAttribute("value", `#${idForEpisodeContainer + counter}`);
-
     // rendering the episode name, season and episode number inside h2
     episodeTitle.textContent = `${episode.name} - ${
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
@@ -45,8 +33,6 @@ function makePageForEpisodes(episodeList) {
     episodePoster.setAttribute("src", `${episode.image.medium}`);
     episodeSummary.innerHTML = `${episode.summary}`;
 
-    //appending option inside the select element
-    selectEpisode.appendChild(selectOptions);
     //appending h2, img, and p element inside the div element
     episodeContainer.appendChild(episodeTitle);
     episodeContainer.appendChild(episodePoster);
@@ -59,28 +45,52 @@ function makePageForEpisodes(episodeList) {
   }
 }
 
-//creating a sorted array of shows
-for (let letter of alphaBet) {
-  for (let show of unorderedShowlist) {
-    if (letter == show.name[0].toLowerCase()) {
-      allShows.push(show);
-    }
+function selectAnEpisode(episodeList) {
+  // taking control of the div and select elements.
+  selectEpisode.innerHTML = ``;
+  // creating variables that will be passed as id attribute to identify the div holding each episode.
+  let idForEpisodeContainer = "div";
+  let counter = 1;
+  for (let episode of episodeList) {
+    // creating an option element to use inside a select element
+    const selectOptions = document.createElement("option");
+
+    selectOptions.textContent = `${
+      episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
+    }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`} - ${
+      episode.name
+    }`;
+    selectOptions.setAttribute("value", `#${idForEpisodeContainer + counter}`);
+    //appending option inside the select element
+    selectEpisode.appendChild(selectOptions);
   }
 }
-console.log(allShows);
-// Iterating through the Array of shows.
-for (let show of allShows) {
-  // creating an option element to use inside a select element
-  const selectOption = document.createElement("option");
-  let alpha = "show";
-  selectOption.textContent = `${show.name}`;
-  selectOption.setAttribute("value", `#${alpha + show.id}`);
-  //appending option inside the select element
-  selectShow.appendChild(selectOption);
+
+function selectAShow() {
+  //creating a sorted array of shows
+  let alphaBet = "abcdefghijklmnopqrstuvwxyz";
+
+  for (let letter of alphaBet) {
+    for (let show of unorderedShowlist) {
+      if (letter == show.name[0].toLowerCase()) {
+        orderedShowList.push(show);
+      }
+    }
+  }
+  // Iterating through the Array of shows.
+  for (let show of orderedShowList) {
+    // creating an option element to use inside a select element
+    const selectOption = document.createElement("option");
+    let alpha = "show";
+    selectOption.textContent = `${show.name}`;
+    selectOption.setAttribute("value", `#${alpha + show.id}`);
+    //appending option inside the select element
+    selectShow.appendChild(selectOption);
+  }
 }
+selectAShow();
 
 // loading each show info on start.
-displayAllShows(allShows);
 function displayAllShows(shows) {
   rootElem.classList.toggle("flexDisplay");
   for (let show of shows) {
@@ -133,10 +143,11 @@ function displayAllShows(shows) {
     rootElem.appendChild(showContainer);
   }
 }
+displayAllShows(orderedShowList);
 
 selectShow.addEventListener("change", () => {
   showId = 0;
-  for (let show of allShows) {
+  for (let show of orderedShowList) {
     if (`#show${show.id}` == selectShow.value) {
       showId += show.id;
       console.log(showId);
@@ -148,14 +159,13 @@ selectShow.addEventListener("change", () => {
     .then((response) => response.json())
     .then((data) => {
       makePageForEpisodes(data);
+      selectAnEpisode(data);
       episodes = data;
     });
 
   // Locating the selected episode.
   selectEpisode.addEventListener("change", () => {
-    console.log(rootElem.childNodes.length);
     if (rootElem.childNodes.length <= 2) {
-      console.log(episodes);
       makePageForEpisodes(episodes);
     }
 
@@ -173,11 +183,11 @@ selectShow.addEventListener("change", () => {
         });
       }
     }
-    console.log(rootElem.childNodes.length);
   });
 
   // creating an event listener for the search input
-  inputElement.addEventListener("keyup", searchEpisodeList);
+  searchForEpisode.addEventListener("keyup", searchEpisodeList);
+
   // creating a call back function for the event listener
   function searchEpisodeList() {
     const rootElem = document.getElementById("root");
@@ -185,7 +195,7 @@ selectShow.addEventListener("change", () => {
     const numberOfEpisodeFound = document.getElementById("displaying");
 
     const matchingEpisodes = [];
-    if (inputElement.value == "") {
+    if (searchForEpisode.value == "") {
       rootElem.innerHTML = ``;
       numberOfEpisodeFound.style.display = "none";
       makePageForEpisodes(episodes);
@@ -196,10 +206,10 @@ selectShow.addEventListener("change", () => {
         if (
           episode.name
             .toLowerCase()
-            .includes(inputElement.value.toLowerCase()) ||
+            .includes(searchForEpisode.value.toLowerCase()) ||
           episode.summary
             .toLowerCase()
-            .includes(inputElement.value.toLowerCase())
+            .includes(searchForEpisode.value.toLowerCase())
         ) {
           matchingEpisodes.push(episode);
         }
