@@ -183,6 +183,7 @@ selectShow.addEventListener("change", () => {
       episodes = data;
       console.log(episodes);
     });
+  returnToShowListing();
 });
 
 console.log(episodes);
@@ -214,7 +215,6 @@ searchForEpisode.addEventListener("keyup", searchEpisodeList);
 
 // creating a call back function for the event listener
 function searchEpisodeList() {
-  const rootElem = document.getElementById("root");
   const divSearchContainer = document.getElementById("search");
   const numberOfEpisodeFound = document.getElementById("displaying");
 
@@ -244,4 +244,16 @@ function searchEpisodeList() {
     divSearchContainer.appendChild(numberOfEpisodeFound);
     makePageForEpisodes(matchingEpisodes);
   }
+}
+
+function returnToShowListing() {
+  const returnButton = document.createElement("button");
+  returnButton.textContent = `Click to view show listing`;
+  returnButton.setAttribute("id", "showListing");
+  document.body.insertBefore(returnButton, rootElem);
+  returnButton.addEventListener("click", () => {
+    rootElem.innerHTML = ``;
+    displayAllShows(orderedShowList);
+    returnButton.remove();
+  });
 }
