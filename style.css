@@ -29,6 +29,9 @@ body {
 .hideShowView {
   display: none;
 }
+.hideEpisodeView {
+  display: none;
+}
 #search #searchEpisode {
   width: 25%;
   height: 2.5em;

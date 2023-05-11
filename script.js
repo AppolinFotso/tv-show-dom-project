@@ -30,7 +30,10 @@ function makePageForEpisodes(episodeList) {
       episode.season < 10 ? `S0${episode.season}` : `S${episode.season}`
     }${episode.number < 10 ? `E0${episode.number}` : `E${episode.number}`}`;
     //rendering an image inside the img element
-    episodePoster.setAttribute("src", `${episode.image.medium}`);
+    episodePoster.setAttribute(
+      "src",
+      `${episode.image == null ? "./comingsoon.jpg" : episode.image.medium}`
+    );
     episodeSummary.innerHTML = `${episode.summary}`;
 
     //appending h2, img, and p element inside the div element
@@ -92,6 +95,7 @@ selectAShow();
 
 // loading each show info on start.
 function displayAllShows(shows) {
+  selectEpisode.classList.toggle("hideEpisodeView");
   rootElem.classList.toggle("flexDisplay");
   for (let show of shows) {
     const showContainer = document.createElement("section");
@@ -162,6 +166,7 @@ displayAllShows(orderedShowList);
 
 // applying event listener on selectShow element
 selectShow.addEventListener("change", () => {
+  selectEpisode.classList.remove("hideEpisodeView");
   showId = 0;
   for (let show of orderedShowList) {
     if (`#show${show.id}` == selectShow.value) {
@@ -176,8 +181,11 @@ selectShow.addEventListener("change", () => {
       makePageForEpisodes(data);
       selectAnEpisode(data);
       episodes = data;
+      console.log(episodes);
     });
 });
+
+console.log(episodes);
 
 // Locating the selected episode.
 selectEpisode.addEventListener("change", () => {
