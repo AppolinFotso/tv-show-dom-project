@@ -26,6 +26,9 @@ body {
   margin-left: 1em;
   background-color: white;
 }
+.hideShowView {
+  display: none;
+}
 #search #searchEpisode {
   width: 25%;
   height: 2.5em;
@@ -106,9 +109,16 @@ body {
   flex-direction: column;
   justify-content: start;
 }
+#root section div div p span {
+  font-weight: bold;
+}
 #root section h2 {
   text-align: center;
   font-size: 3em;
+  cursor: pointer;
+}
+#root section h2:hover {
+  color: orange;
 }
 #root section div img {
   border-radius: 1em 1em 1em 1em;

@@ -111,7 +111,7 @@ function displayAllShows(shows) {
       `${show.image == null ? "./comingsoon.jpg" : show.image.medium}`
     );
     showSummary.innerHTML = `${show.summary}`;
-    showRating.textContent = `Rated: ${show.rating.average}`;
+    showRating.innerHTML = `<span>Rated</span>: ${show.rating.average}`;
     // iterate through each show genres
     let genres;
 
@@ -126,9 +126,9 @@ function displayAllShows(shows) {
         }
       }
     }
-    showGenres.textContent = `Genres: ${show.genres}`;
-    showStatus.textContent = `Status: ${show.status}`;
-    showRuntime.textContent = `Runtime: ${show.runtime}`;
+    showGenres.innerHTML = `<span>Genres</span>: ${show.genres}`;
+    showStatus.innerHTML = `<span>Status</span>: ${show.status}`;
+    showRuntime.innerHTML = `<span>Runtime</span>: ${show.runtime}`;
     ratingContainer.appendChild(showRating);
     ratingContainer.appendChild(showGenres);
 
@@ -153,6 +153,7 @@ function displayAllShows(shows) {
             selectAnEpisode(data);
             episodes = data;
           });
+        //selectShow.classList.toggle("hideShowView");
       }
     });
   }
