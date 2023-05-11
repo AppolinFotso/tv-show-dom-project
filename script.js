@@ -196,23 +196,25 @@ selectShow.addEventListener("change", () => {
       makePageForEpisodes(data);
       selectAnEpisode(data);
       episodes = data;
-      console.log(episodes);
     });
   returnToShows.innerHTML = ``;
   returnToShowListing();
+  numberOfEpisodeFound.textContent = ``;
 });
-console.log(orderedShowList);
-console.log(episodes);
 
 // Locating the selected episode.
 selectEpisode.addEventListener("change", () => {
-  if (rootElem.childNodes.length <= 2) {
-    makePageForEpisodes(episodes);
-  }
-
+  makePageForEpisodes(episodes);
   for (let child of rootElem.childNodes) {
-    if (`#${child.getAttribute("id")}` == selectEpisode.value) {
+    if (
+      selectEpisode.options[selectEpisode.selectedIndex].textContent.includes(
+        child.firstChild.textContent.substring(
+          child.firstChild.textContent.length - 6
+        )
+      )
+    ) {
       const reloadPage = document.createElement("button");
+      reloadPage.style.cursor = "pointer";
       reloadPage.textContent = `Reload all the episodes`;
       rootElem.innerHTML = ``;
       rootElem.appendChild(child);
