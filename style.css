@@ -50,6 +50,15 @@ body {
   font-size: 1.2em;
   border: 3px solid white;
 }
+#search #searchShow {
+  width: 25%;
+  height: 2.5em;
+  margin: 2em auto 2em 1em;
+  border-radius: 1em 1em 1em 1em;
+  padding-left: 2em;
+  font-size: 1.2em;
+  border: 3px solid white;
+}
 #search #displaying {
   padding-left: 1em;
   font-size: 1.2em;

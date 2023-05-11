@@ -2,6 +2,10 @@ const rootElem = document.getElementById("root");
 const selectEpisode = document.getElementById("selectEpisode");
 const selectShow = document.querySelector("#selectShow");
 const searchForEpisode = document.getElementById("searchEpisode");
+const searchForShow = document.getElementById("searchShow");
+const divSearchContainer = document.getElementById("search");
+const numberOfEpisodeFound = document.getElementById("displaying");
+
 const returnToShows = document.createElement("button");
 
 const unorderedShowlist = getAllShows();
@@ -11,6 +15,9 @@ let showId;
 
 function makePageForEpisodes(episodeList) {
   rootElem.classList.remove("flexDisplay");
+  searchForEpisode.classList.remove("hideEpisodeView");
+  searchForShow.classList.add("hideEpisodeView");
+
   returnToShows.innerHTML = ``;
   returnToShowListing();
 
@@ -97,7 +104,10 @@ selectAShow();
 
 // loading each show info on start.
 function displayAllShows(shows) {
-  selectEpisode.classList.toggle("hideEpisodeView");
+  selectEpisode.classList.add("hideEpisodeView");
+  searchForEpisode.classList.add("hideEpisodeView");
+  searchForShow.classList.remove("hideEpisodeView");
+
   rootElem.classList.remove("flexDisplay");
   rootElem.classList.toggle("flexDisplay");
   for (let show of shows) {
@@ -162,6 +172,7 @@ function displayAllShows(shows) {
             selectAnEpisode(data);
             episodes = data;
           });
+        numberOfEpisodeFound.textContent = ``;
       }
     });
   }
@@ -190,7 +201,7 @@ selectShow.addEventListener("change", () => {
   returnToShows.innerHTML = ``;
   returnToShowListing();
 });
-
+console.log(orderedShowList);
 console.log(episodes);
 
 // Locating the selected episode.
@@ -220,9 +231,6 @@ searchForEpisode.addEventListener("keyup", searchEpisodeList);
 
 // creating a call back function for the event listener
 function searchEpisodeList() {
-  const divSearchContainer = document.getElementById("search");
-  const numberOfEpisodeFound = document.getElementById("displaying");
-
   const matchingEpisodes = [];
   if (searchForEpisode.value == "") {
     rootElem.innerHTML = ``;
@@ -261,4 +269,40 @@ function returnToShowListing() {
     returnToShows.remove();
     selectEpisode.classList.add("hideEpisodeView");
   });
+}
+
+// creating a call back function for the event listener
+searchForShow.addEventListener("keyup", searchShowList);
+function searchShowList() {
+  const matchingEpisodes = [];
+  if (searchForShow.value == "") {
+    rootElem.innerHTML = ``;
+    numberOfEpisodeFound.style.display = "none";
+    displayAllShows(orderedShowList);
+  } else {
+    rootElem.innerHTML = ``;
+
+    for (let episode of orderedShowList) {
+      if (
+        episode.name
+          .toLowerCase()
+          .includes(searchForShow.value.toLowerCase()) ||
+        episode.summary
+          .toLowerCase()
+          .includes(searchForShow.value.toLowerCase())
+      ) {
+        matchingEpisodes.push(episode);
+      }
+      for (let genre of episode.genres) {
+        if (genre.toLowerCase().includes(searchForShow.value.toLowerCase())) {
+          matchingEpisodes.push(episode);
+        }
+      }
+    }
+    numberOfEpisodeFound.style.display = "";
+
+    numberOfEpisodeFound.textContent = `Displaying ${matchingEpisodes.length} of ${orderedShowList.length} Shows`;
+    divSearchContainer.appendChild(numberOfEpisodeFound);
+    displayAllShows(matchingEpisodes);
+  }
 }
