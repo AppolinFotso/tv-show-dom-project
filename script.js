@@ -150,6 +150,8 @@ function displayAllShows(shows) {
     rootElem.appendChild(showContainer);
     showHeader.addEventListener("click", (e) => {
       if (e.target.textContent === show.name) {
+        selectEpisode.classList.toggle("hideEpisodeView");
+
         const myPromise = fetch(
           `https://api.tvmaze.com/shows/${show.id}/episodes`
         );
@@ -160,7 +162,6 @@ function displayAllShows(shows) {
             selectAnEpisode(data);
             episodes = data;
           });
-        //selectShow.classList.toggle("hideShowView");
       }
     });
   }
@@ -258,5 +259,6 @@ function returnToShowListing() {
     rootElem.innerHTML = ``;
     displayAllShows(orderedShowList);
     returnToShows.remove();
+    selectEpisode.classList.add("hideEpisodeView");
   });
 }
