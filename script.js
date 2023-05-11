@@ -2,15 +2,17 @@ const rootElem = document.getElementById("root");
 const selectEpisode = document.getElementById("selectEpisode");
 const selectShow = document.querySelector("#selectShow");
 const searchForEpisode = document.getElementById("searchEpisode");
+const returnToShows = document.createElement("button");
+
 const unorderedShowlist = getAllShows();
 const orderedShowList = [];
 let episodes;
 let showId;
 
 function makePageForEpisodes(episodeList) {
-  if (rootElem.classList.contains("flexDisplay")) {
-    rootElem.classList.remove("flexDisplay");
-  }
+  rootElem.classList.remove("flexDisplay");
+  returnToShows.innerHTML = ``;
+  returnToShowListing();
 
   // taking control of the div and select elements.
   rootElem.innerHTML = ``;
@@ -96,6 +98,7 @@ selectAShow();
 // loading each show info on start.
 function displayAllShows(shows) {
   selectEpisode.classList.toggle("hideEpisodeView");
+  rootElem.classList.remove("flexDisplay");
   rootElem.classList.toggle("flexDisplay");
   for (let show of shows) {
     const showContainer = document.createElement("section");
@@ -183,6 +186,7 @@ selectShow.addEventListener("change", () => {
       episodes = data;
       console.log(episodes);
     });
+  returnToShows.innerHTML = ``;
   returnToShowListing();
 });
 
@@ -247,13 +251,12 @@ function searchEpisodeList() {
 }
 
 function returnToShowListing() {
-  const returnButton = document.createElement("button");
-  returnButton.textContent = `Click to view show listing`;
-  returnButton.setAttribute("id", "showListing");
-  document.body.insertBefore(returnButton, rootElem);
-  returnButton.addEventListener("click", () => {
+  returnToShows.innerHTML = `Click to view <br>show listing`;
+  returnToShows.setAttribute("id", "showListing");
+  document.body.insertBefore(returnToShows, rootElem);
+  returnToShows.addEventListener("click", () => {
     rootElem.innerHTML = ``;
     displayAllShows(orderedShowList);
-    returnButton.remove();
+    returnToShows.remove();
   });
 }

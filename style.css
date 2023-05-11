@@ -6,6 +6,15 @@ body {
   flex-direction: column;
   background-size: cover;
 }
+#showListing {
+  margin: auto;
+  border-radius: 50%;
+  height: 7em;
+  width: 7em;
+  cursor: pointer;
+  margin-top: 0.5em;
+  margin-bottom: -2em;
+}
 #search {
   position: relative;
   height: 15vh;
@@ -133,7 +142,7 @@ button {
   height: 3em;
   width: 12em;
   font-size: 1.2em;
-  background-color: yellow;
+  background-color: orange;
 }
 
 footer {
