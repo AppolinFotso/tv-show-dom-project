@@ -47,7 +47,7 @@ function makePageForEpisodes(episodeList) {
 
 function selectAnEpisode(episodeList) {
   // taking control of the div and select elements.
-  selectEpisode.innerHTML = ``;
+  selectEpisode.innerHTML = `<option selected>Select one episode to watch</option>`;
   // creating variables that will be passed as id attribute to identify the div holding each episode.
   let idForEpisodeContainer = "div";
   let counter = 1;
@@ -142,7 +142,7 @@ function displayAllShows(shows) {
     showContainer.appendChild(showInfo);
     rootElem.appendChild(showContainer);
     showHeader.addEventListener("click", (e) => {
-      if (e.target.textContent == show.name) {
+      if (e.target.textContent === show.name) {
         const myPromise = fetch(
           `https://api.tvmaze.com/shows/${show.id}/episodes`
         );
