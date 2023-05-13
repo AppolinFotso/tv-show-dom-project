@@ -102,6 +102,7 @@ function selectAShow() {
   }
 }
 selectAShow();
+console.log(orderedShowList);
 
 // loading each show info on start.
 function displayAllShows(shows) {
@@ -123,6 +124,20 @@ function displayAllShows(shows) {
     const showStatus = document.createElement("p");
     const showRuntime = document.createElement("p");
     const ratingContainer = document.createElement("div");
+    const listOfCasts = document.createElement("section");
+    const castsHeader = document.createElement("h2");
+
+    // appending headings for each episode
+    castsHeader.textContent = `Click to View Cast members`;
+
+    // Adding a class attribute to the listOfCasts
+
+    listOfCasts.classList.add("hideCast");
+
+    // Adding click event on castsHeader
+    castsHeader.addEventListener("click", () => {
+      listOfCasts.classList.toggle("hideCast");
+    });
 
     showHeader.textContent = `${show.name}`;
     showImage.setAttribute(
@@ -130,6 +145,8 @@ function displayAllShows(shows) {
       `${show.image == null ? "./comingsoon.jpg" : show.image.medium}`
     );
     showSummary.innerHTML = `${show.summary}`;
+    showSummary.appendChild(castsHeader);
+
     showRating.innerHTML = `<span>Rated</span>: ${show.rating.average}`;
     // iterate through each show genres
     let genres;
@@ -148,17 +165,25 @@ function displayAllShows(shows) {
     showGenres.innerHTML = `<span>Genres</span>: ${show.genres}`;
     showStatus.innerHTML = `<span>Status</span>: ${show.status}`;
     showRuntime.innerHTML = `<span>Runtime</span>: ${show.runtime}`;
-    ratingContainer.appendChild(showRating);
-    ratingContainer.appendChild(showGenres);
 
-    ratingContainer.appendChild(showStatus);
+    // view casts in the show listing
+    const myPromise = fetch(
+      `http://api.tvmaze.com/shows/${show.id}?embed=cast`
+    );
+    myPromise
+      .then((response) => response.json())
+      .then((data) => {
+        for (let cast of data._embedded.cast) {
+          const castName = document.createElement("span");
+          castName.textContent = `${cast.person.name}`;
+          listOfCasts.appendChild(castName);
+        }
+      });
 
-    ratingContainer.appendChild(showRuntime);
-    showInfo.appendChild(showImage);
-    showInfo.appendChild(showSummary);
-    showInfo.appendChild(ratingContainer);
-    showContainer.appendChild(showHeader);
-    showContainer.appendChild(showInfo);
+    // appending to parents
+    ratingContainer.append(showRating, showGenres, showStatus, showRuntime);
+    showInfo.append(showImage, showSummary, ratingContainer);
+    showContainer.append(showHeader, showInfo, listOfCasts);
     rootElem.appendChild(showContainer);
     showHeader.addEventListener("click", (e) => {
       if (e.target.textContent === show.name) {

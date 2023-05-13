@@ -130,6 +130,15 @@ body {
   flex-direction: column;
   justify-content: start;
 }
+#root section div p > h2 {
+  color: black;
+  padding: 0.5em;
+  font-size: 1.5em;
+  width: 15em;
+  text-align: center;
+  margin: auto;
+}
+
 #root section div div p span {
   font-weight: bold;
 }
@@ -145,6 +154,18 @@ body {
   border-radius: 1em 1em 1em 1em;
   box-shadow: 1px 1px 5px white;
   border: 1px solid white;
+}
+#root section section {
+  padding: 1em;
+  margin: auto;
+  text-align: center;
+  background-color: orange;
+}
+#root section section span {
+  padding: 1em;
+}
+.hideCast {
+  display: none;
 }
 button {
   border-radius: 1em 1em 1em 1em;
