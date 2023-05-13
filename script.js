@@ -17,6 +17,7 @@ function makePageForEpisodes(episodeList) {
   rootElem.classList.remove("flexDisplay");
   searchForEpisode.classList.remove("hideEpisodeView");
   searchForShow.classList.add("hideEpisodeView");
+  divSearchContainer.classList.remove("hideEpisodeView");
 
   returnToShows.innerHTML = ``;
   returnToShowListing();
@@ -107,6 +108,7 @@ function displayAllShows(shows) {
   selectEpisode.classList.add("hideEpisodeView");
   searchForEpisode.classList.add("hideEpisodeView");
   searchForShow.classList.remove("hideEpisodeView");
+  divSearchContainer.classList.remove("hideEpisodeView");
 
   rootElem.classList.remove("flexDisplay");
   rootElem.classList.toggle("flexDisplay");
@@ -226,6 +228,7 @@ selectEpisode.addEventListener("change", () => {
       });
     }
   }
+  divSearchContainer.classList.add("hideEpisodeView");
 });
 
 // creating an event listener for the search input
@@ -242,15 +245,25 @@ function searchEpisodeList() {
     rootElem.innerHTML = ``;
 
     for (let episode of episodes) {
-      if (
-        episode.name
-          .toLowerCase()
-          .includes(searchForEpisode.value.toLowerCase()) ||
-        episode.summary
-          .toLowerCase()
-          .includes(searchForEpisode.value.toLowerCase())
-      ) {
-        matchingEpisodes.push(episode);
+      if (episode.summary == null) {
+        if (
+          episode.name
+            .toLowerCase()
+            .includes(searchForEpisode.value.toLowerCase())
+        ) {
+          matchingEpisodes.push(episode);
+        }
+      } else {
+        if (
+          episode.name
+            .toLowerCase()
+            .includes(searchForEpisode.value.toLowerCase()) ||
+          episode.summary
+            .toLowerCase()
+            .includes(searchForEpisode.value.toLowerCase())
+        ) {
+          matchingEpisodes.push(episode);
+        }
       }
     }
     numberOfEpisodeFound.style.display = "";
