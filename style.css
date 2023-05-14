@@ -155,14 +155,22 @@ body {
   box-shadow: 1px 1px 5px white;
   border: 1px solid white;
 }
-#root section section {
+#root section ul {
   padding: 1em;
   margin: auto;
   text-align: center;
   background-color: orange;
+  border-radius: 1em 1em 1em 1em;
 }
-#root section section span {
-  padding: 1em;
+#root section ul li {
+  display: inline;
+  padding: 0.5em;
+  text-decoration: underline;
+}
+#root section ul li:hover {
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 .hideCast {
   display: none;

@@ -124,7 +124,7 @@ function displayAllShows(shows) {
     const showStatus = document.createElement("p");
     const showRuntime = document.createElement("p");
     const ratingContainer = document.createElement("div");
-    const listOfCasts = document.createElement("section");
+    const listOfCasts = document.createElement("ul");
     const castsHeader = document.createElement("h2");
 
     // appending headings for each episode
@@ -174,7 +174,7 @@ function displayAllShows(shows) {
       .then((response) => response.json())
       .then((data) => {
         for (let cast of data._embedded.cast) {
-          const castName = document.createElement("span");
+          const castName = document.createElement("li");
           castName.textContent = `${cast.person.name}`;
           listOfCasts.appendChild(castName);
         }
