@@ -21,12 +21,12 @@ body {
   width: 98vw;
   background-color: rgb(27, 25, 25);
   padding-left: 1em;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   box-shadow: 1px 1px 5px gainsboro;
 }
 
 #search select {
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   padding-left: 1.5em;
   font-size: 1.2em;
   height: 2.5em;
@@ -45,7 +45,7 @@ body {
   width: 25%;
   height: 2.5em;
   margin: 2em auto 2em 1em;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   padding-left: 2em;
   font-size: 1.2em;
   border: 3px solid white;
@@ -54,7 +54,7 @@ body {
   width: 25%;
   height: 2.5em;
   margin: 2em auto 2em 1em;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   padding-left: 2em;
   font-size: 1.2em;
   border: 3px solid white;
@@ -68,7 +68,7 @@ body {
 #root {
   color: black;
   margin-top: 3em;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
 }
 .gridDisplay {
   display: grid;
@@ -94,7 +94,7 @@ body {
 
 #root div h2 {
   background-color: white;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   box-shadow: 1px 1px 5px white;
 
   padding: 0.5em 0.5em;
@@ -114,7 +114,7 @@ body {
 
 #root section {
   background-color: white;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   width: 70%;
   box-shadow: 1px 1px 5px white;
 }
@@ -151,7 +151,7 @@ body {
   color: orange;
 }
 #root section div img {
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   box-shadow: 1px 1px 5px white;
   border: 1px solid white;
 }
@@ -160,7 +160,7 @@ body {
   margin: auto;
   text-align: center;
   background-color: orange;
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
 }
 #root section ul li {
   display: inline;
@@ -176,7 +176,7 @@ body {
   display: none;
 }
 button {
-  border-radius: 1em 1em 1em 1em;
+  border-radius: 1em;
   height: 3em;
   width: 12em;
   font-size: 1.2em;
