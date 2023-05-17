@@ -168,7 +168,7 @@ function displayAllShows(shows) {
 
     // view casts in the show listing
     const myPromise = fetch(
-      `http://api.tvmaze.com/shows/${show.id}?embed=cast`
+      `https://api.tvmaze.com/shows/${show.id}?embed=cast`
     );
     myPromise
       .then((response) => response.json())
