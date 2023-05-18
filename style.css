@@ -1,3 +1,189 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background-size: cover;
+}
+#showListing {
+  margin: auto;
+  border-radius: 50%;
+  height: 7em;
+  width: 7em;
+  cursor: pointer;
+  margin-top: 0.5em;
+  margin-bottom: -2em;
+}
+#search {
+  position: relative;
+  height: 15vh;
+  width: 98vw;
+  background-color: rgb(27, 25, 25);
+  padding-left: 1em;
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px gainsboro;
+}
+
+#search select {
+  border-radius: 1em;
+  padding-left: 1.5em;
+  font-size: 1.2em;
+  height: 2.5em;
+  width: 25em;
+  border: 3px solid white;
+  margin-left: 1em;
+  background-color: white;
+}
+.hideShowView {
+  display: none;
+}
+.hideEpisodeView {
+  display: none;
+}
+#search #searchEpisode {
+  width: 25%;
+  height: 2.5em;
+  margin: 2em auto 2em 1em;
+  border-radius: 1em;
+  padding-left: 2em;
+  font-size: 1.2em;
+  border: 3px solid white;
+}
+#search #searchShow {
+  width: 25%;
+  height: 2.5em;
+  margin: 2em auto 2em 1em;
+  border-radius: 1em;
+  padding-left: 2em;
+  font-size: 1.2em;
+  border: 3px solid white;
+}
+#search #displaying {
+  padding-left: 1em;
+  font-size: 1.2em;
+  color: white;
+  font-weight: bolder;
+}
 #root {
-  color: red;
+  color: black;
+  margin-top: 3em;
+  border-radius: 1em;
+}
+.gridDisplay {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+  background: url("./dragon.jpeg");
+  padding: 2em;
+}
+.flexDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  align-items: center;
+  background: url("./dragon.jpeg");
+  padding-top: 3em;
+}
+#root div {
+  box-shadow: 1px 1px 5px gainsboro;
+  background-color: rgb(27, 25, 25);
+  text-align: center;
+  border-radius: 1.3em 1.3em 1em 1em;
+}
+
+#root div h2 {
+  background-color: white;
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px white;
+
+  padding: 0.5em 0.5em;
+  margin-top: 0;
+}
+
+#root div p {
+  opacity: 0.7;
+  text-align: left;
+  margin: 1em;
+  color: white;
+}
+
+#root div img {
+  border: 1px solid white;
+}
+
+#root section {
+  background-color: white;
+  border-radius: 1em;
+  width: 70%;
+  box-shadow: 1px 1px 5px white;
+}
+
+#root section > div {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  padding: 5em;
+  margin: 0.5em;
+}
+#root section div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+#root section div p > h2 {
+  color: black;
+  padding: 0.5em;
+  font-size: 1.5em;
+  width: 15em;
+  text-align: center;
+  margin: auto;
+}
+
+#root section div div p span {
+  font-weight: bold;
+}
+#root section h2 {
+  text-align: center;
+  font-size: 3em;
+  cursor: pointer;
+}
+#root section h2:hover {
+  color: orange;
+}
+#root section div img {
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px white;
+  border: 1px solid white;
+}
+#root section ul {
+  padding: 1em;
+  margin: auto;
+  text-align: center;
+  background-color: orange;
+  border-radius: 1em;
+}
+#root section ul li {
+  display: inline;
+  padding: 0.5em;
+  text-decoration: underline;
+}
+#root section ul li:hover {
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.hideCast {
+  display: none;
+}
+button {
+  border-radius: 1em;
+  height: 3em;
+  width: 12em;
+  font-size: 1.2em;
+  background-color: orange;
+}
+
+footer {
+  padding: 3em;
+  color: black;
 }

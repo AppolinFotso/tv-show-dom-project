@@ -3,18 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TV Show Project | My Name (My GitHub username)</title>
+    <script
+      src="https://kit.fontawesome.com/c855c29e01.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>TV Show Project | Appolin Semegni Fotso (AppolinFotso)</title>
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
-    <div id="root">
+    <div id="search">
+      <select name="selectShow" id="selectShow">
+        <option selected>Select one show to watch</option>
+      </select>
+      <select name="selectEpisode" id="selectEpisode">
+        <option>Select one episode to watch</option>
+      </select>
+      <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+      <input
+        type="search"
+        id="searchEpisode"
+        placeholder="Search for episodes"
+      />
+      <input type="search" id="searchShow" placeholder="Search for shows" />
+      <span id="displaying"></span>
     </div>
-
+    <div id="root" class="gridDisplay"></div>
+    <footer>
+      Data on this webpage originated from
+      <a href="https://www.tvmaze.com/">TVMaze</a> and lincesing about each
+      episode can be found at
+      <a href="https://www.tvmaze.com/api#licensing"
+        >tvmaze.com/api#licensing</a
+      >
+    </footer>
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
+    <script src="shows.js"></script>
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>
